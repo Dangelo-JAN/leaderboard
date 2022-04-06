@@ -1,0 +1,14 @@
+body {
+  margin: 0;
+  padding: 0;
+  background-color: red;
+}
+
+.container {
+  display: flex;
+}
+
+.container-column {
+  display: flex;
+  flex-direction: column;
+}
