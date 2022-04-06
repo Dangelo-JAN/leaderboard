@@ -13,15 +13,15 @@
       <div class="container-column">
         <div class="container">
           <h2>Recent scores</h2>
-          <button>refresh</button>
+          <button type="button" id="refresh">refresh</button>
         </div>
-        <div class="leaderboard"></div>
+        <div class="leaderboard" id="leaderboard"></div>
       </div>
-      <form class="container-column">
+      <form class="container-column" id="leaderboard-form">
         <h2>Add your score</h2>
-        <input type="text" class="" placeholder="Your name"/>
-        <input type="text" class="" placeholder="Your score"/>
-        <button>Submit</button>
+        <input type="text" class="" id="input-name" placeholder="Your name"/>
+        <input type="number" class="" id="input-score" placeholder="Your score"/>
+        <button type="submit" id="submit">Submit</button>
       </form>
     </div>
   </header>    
