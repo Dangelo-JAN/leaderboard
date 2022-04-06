@@ -5,7 +5,7 @@ const containerLeaderboard = document.getElementById('leaderboard');
 
 const leaderBoard = () => {
   tableScores.forEach((score) => {
-    const scoreRow = document.createElement('p');
+    const scoreRow = document.createElement('li');
     containerLeaderboard.appendChild(scoreRow);
     scoreRow.textContent = `${score.name}: ${score.score}`;
   });
