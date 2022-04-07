@@ -1,0 +1,45 @@
+body {
+  margin: 0;
+  padding: 5%;
+  font-family: "Courier New", Courier, monospace;
+}
+
+input {
+  margin-top: 1em;
+  border: solid;
+  width: 19vw;
+}
+
+li {
+  list-style: none;
+  padding-left: 1em;
+}
+
+li:nth-child(even) {
+  background-color: gray;
+}
+
+button {
+  font-family: "Courier New", Courier, monospace;
+  border: solid 2px;
+  padding: 0.1em 0.5em;
+  box-shadow: 3px 3px;
+  margin: auto;
+}
+
+.container {
+  display: flex;
+}
+
+.container-column {
+  display: flex;
+  flex-direction: column;
+  width: 40vw;
+  padding: 0 5vw;
+}
+
+.leaderboard {
+  margin-top: 1em;
+  border: solid;
+  width: 27vw;
+}
