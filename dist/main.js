@@ -7,40 +7,58 @@
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */   "addScore": () => (/* binding */ addScore),
+/* harmony export */   "loadScores": () => (/* binding */ loadScores)
 /* harmony export */ });
-const tableScores = [
-  {
-    name: 'name',
-    score: 100,
-  },
-  {
-    name: 'name',
-    score: 20,
-  },
-  {
-    name: 'name',
-    score: 50,
-  },
-  {
-    name: 'name',
-    score: 78,
-  },
-  {
-    name: 'name',
-    score: 125,
-  },
-  {
-    name: 'name',
-    score: 77,
-  },
-  {
-    name: 'name',
-    score: 42,
-  },
-];
+const inputName = document.getElementById('input-name');
+const inputScore = document.getElementById('input-score');
+const leaderBoard = document.getElementById('leaderboard');
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (tableScores);
+const url = 'https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/enuSmmGLNQXzHU49kR78/scores/';
+
+const createDiv = (scores) => {
+  leaderBoard.innerHTML = '';
+  const sortedScores = scores.sort((a, b) => b.score - a.score);
+  sortedScores.forEach((score) => {
+    const scoreContainer = `
+      <div class="score">
+        <p class="score-text">${score.user}: ${score.score}</p>
+      </div>
+    `;
+    leaderBoard.innerHTML += scoreContainer;
+  });
+};
+
+// Scores
+const getScores = async () => {
+  const response = await fetch(url);
+  const scores = await response.json();
+  return scores.result;
+};
+
+const addScore = async () => {
+  const response = await fetch(url, {
+    method: 'POST',
+    headers: {
+      'Content-type': 'application/json',
+    },
+    body: JSON.stringify({
+      user: inputName.value,
+      score: inputScore.value,
+    }),
+  });
+
+  const status = await response.json();
+  return status;
+};
+
+const loadScores = () => {
+  getScores().then((scores) => {
+    createDiv(scores);
+  });
+};
+
+
 
 /***/ }),
 /* 2 */
@@ -586,22 +604,25 @@ var __webpack_exports__ = {};
 // This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
 (() => {
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _modules_tablescore_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
+/* harmony import */ var _modules_api_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
 /* harmony import */ var _styles_index_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(2);
 
 
 
-const containerLeaderboard = document.getElementById('leaderboard');
+const form = document.getElementById('leaderboard-form');
+const refreshButton = document.getElementById('refresh');
 
-const leaderBoard = () => {
-  _modules_tablescore_js__WEBPACK_IMPORTED_MODULE_0__["default"].forEach((score) => {
-    const scoreRow = document.createElement('li');
-    containerLeaderboard.appendChild(scoreRow);
-    scoreRow.textContent = `${score.name}: ${score.score}`;
-  });
-};
+(0,_modules_api_js__WEBPACK_IMPORTED_MODULE_0__.loadScores)();
 
-leaderBoard();
+form.addEventListener('submit', (e) => {
+  e.preventDefault();
+  (0,_modules_api_js__WEBPACK_IMPORTED_MODULE_0__.addScore)();
+  form.reset();
+});
+
+refreshButton.addEventListener('click', () => {
+  (0,_modules_api_js__WEBPACK_IMPORTED_MODULE_0__.loadScores)();
+});
 })();
 
 /******/ })()
