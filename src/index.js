@@ -1,14 +1,17 @@
-import tableScores from './modules/tablescore.js';
+import { addScore, loadScores } from './modules/api.js';
 import './styles/index.css';
 
-const containerLeaderboard = document.getElementById('leaderboard');
+const form = document.getElementById('leaderboard-form');
+const refreshButton = document.getElementById('refresh');
 
-const leaderBoard = () => {
-  tableScores.forEach((score) => {
-    const scoreRow = document.createElement('li');
-    containerLeaderboard.appendChild(scoreRow);
-    scoreRow.textContent = `${score.name}: ${score.score}`;
-  });
-};
+loadScores();
 
-leaderBoard();
+form.addEventListener('submit', (e) => {
+  e.preventDefault();
+  addScore();
+  form.reset();
+});
+
+refreshButton.addEventListener('click', () => {
+  loadScores();
+});
