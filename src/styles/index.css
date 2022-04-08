@@ -43,3 +43,7 @@ button {
   border: solid;
   width: 27vw;
 }
+
+#submit {
+  margin-top: 1em;
+}
