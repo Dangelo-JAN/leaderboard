@@ -7,7 +7,7 @@ const createGame = async () => {
       'Content-type': 'application/json',
     },
     body: JSON.stringify({
-        name: 'newGame',
+      name: 'newGame',
     }),
   });
   return response.json();
