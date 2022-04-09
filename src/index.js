@@ -1,4 +1,5 @@
 import { addScore, loadScores } from './modules/api.js';
+
 import './styles/index.css';
 
 const form = document.getElementById('leaderboard-form');
