@@ -2,16 +2,14 @@ const inputName = document.getElementById('input-name');
 const inputScore = document.getElementById('input-score');
 const leaderBoard = document.getElementById('leaderboard');
 
-const url = 'https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/enuSmmGLNQXzHU49kR78/scores/';
+const url = 'https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/zqq0RWTogfgNa3CT4inU/scores/';
 
 const createDiv = (scores) => {
   leaderBoard.innerHTML = '';
   const sortedScores = scores.sort((a, b) => b.score - a.score);
   sortedScores.forEach((score) => {
     const scoreContainer = `
-      <div class="score">
-        <p class="score-text">${score.user}: ${score.score}</p>
-      </div>
+      <li class="score-text">${score.user}: ${score.score}</li>
     `;
     leaderBoard.innerHTML += scoreContainer;
   });
@@ -25,7 +23,7 @@ const getScores = async () => {
 };
 
 const addScore = async () => {
-  const response = await fetch(url, {
+  const response = fetch(url, {
     method: 'POST',
     headers: {
       'Content-type': 'application/json',
